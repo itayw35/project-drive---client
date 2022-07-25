@@ -43,6 +43,7 @@ export default function Folder(props) {
         </div>
       ) : (
         <input
+          autoFocus
           value={myValue}
           onChange={(e) => setMyValue(e.target.value)}
           onKeyDown={handleRename}

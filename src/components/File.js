@@ -66,8 +66,10 @@ export default function File(props) {
           ) : null}
         </div>
       ) : (
-        <div className="rename-file">
+        <div className="rename-file-container">
           <input
+            autoFocus
+            className="rename-file-content"
             value={myValue}
             onChange={(e) => setMyValue(e.target.value)}
             onKeyDown={handleRename}

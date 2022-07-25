@@ -77,7 +77,10 @@ export default function Folders() {
         <div className="folders-inner-width">
           <br />
           <div className="section-title-container">
-            <div className="section-title"> Folders</div>
+            <div className="section-title">
+              {" "}
+              <h3>Folders</h3>
+            </div>
           </div>
           <div className="folder-section-container">
             <div className="folder-section">
@@ -103,7 +106,9 @@ export default function Folders() {
           </div>
           <br />
           <div className="section-title-container">
-            <div className="section-title">Files</div>
+            <div className="section-title">
+              <h3>Files</h3>
+            </div>
           </div>
           <div className="file-section-container">
             <div className="file-section-content">
