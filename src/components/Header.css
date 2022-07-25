@@ -1,4 +1,17 @@
 .header-path {
   display: flex;
   flex-wrap: wrap;
+  height: 90px;
+  align-items: center;
+  width: 80vw;
+}
+.inner-header-path {
+  display: flex;
+  /* flex-wrap: wrap; */
+}
+.header-container {
+  display: flex;
+  justify-content: center;
+  height: 90px;
+  border: 2px black solid;
 }

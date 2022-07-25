@@ -1,10 +1,48 @@
 .popup {
-  height: 25%;
-  width: 20%;
+  height: 40%;
+  width: 40%;
   position: absolute;
-  left: 50%;
-
-  top: 50%;
+  left: 30%;
+  border-radius: 20px;
+  top: 30%;
   z-index: 1;
   background-color: floralwhite;
+}
+.new-folder-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 75%;
+  color: blue;
+}
+.new-folder-container {
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  justify-content: center;
+  align-items: center;
+}
+.popup-input {
+  height: 30px;
+  width: 100px;
+}
+.popup-button-style {
+  background-color: white;
+  height: 40px;
+  width: 150px;
+  border-radius: 50px;
+}
+.new-file-container {
+  display: flex;
+  flex-direction: column;
+  height: 80%;
+  justify-content: center;
+  align-items: center;
+}
+.new-file-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 75%;
+  color: blue;
 }

@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 import Folders from "../pages/Folders";
-import "./Main.css";
 import { PopupContext } from "../context/Context";
-
+import "./Main.css";
 export default function Main() {
   const { clicked } = useContext(PopupContext);
   return (
@@ -11,7 +10,6 @@ export default function Main() {
       className="overlay"
       style={clicked ? { opacity: 0.5 } : { opacity: 1 }}
     >
-      Main
       <Routes>
         <Route path="/" element={<Navigate to="/folder" />} />
         <Route path="/folder" element={<Folders />} />

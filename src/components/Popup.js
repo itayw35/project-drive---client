@@ -1,7 +1,7 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useState } from "react";
 import axios from "axios";
 import "./Popup.css";
-import { PathContext, PopupContext } from "../context/Context";
+import { PopupContext } from "../context/Context";
 
 export default function Popup() {
   const folderName = useRef();
@@ -14,10 +14,10 @@ export default function Popup() {
     setIsNewFile,
     currentPath,
   } = useContext(PopupContext);
+  const [message, setMessage] = useState();
   const createFolder = function () {
     setClicked(false);
     setIsNewFolder(false);
-    console.log(currentPath);
     axios
       .post("http://localhost:3050/folders/create", {
         folderName: `${currentPath}/${folderName.current.value}`,
@@ -37,28 +37,52 @@ export default function Popup() {
         console.log(data);
         setClicked(false);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+      });
   };
   const handleClosing = function () {
     setClicked(false);
-    setIsNewFolder(false);
-    setIsNewFile(false);
+    if (isNewFile) setIsNewFile(false);
+    else setIsNewFolder(false);
   };
   return (
     <div className="popup">
       {isNewFolder ? (
-        <div>
-          <label>New Folder:</label>
-          <input ref={folderName} placeholder="un-named folder"></input>
-          <button onClick={createFolder}>New</button>
+        <div className="new-folder-container">
+          <div className="new-folder-content">
+            <div>
+              <label>New Folder:</label>
+              <input
+                className="popup-input"
+                ref={folderName}
+                placeholder="un-named folder"
+              ></input>
+            </div>
+            <div>
+              <button className="popup-button-style" onClick={createFolder}>
+                New
+              </button>
+            </div>
+          </div>
         </div>
-      ) : isNewFile ? (
-        <div>
-          <input ref={newFile} type="file"></input>
-          <button onClick={createFile}>New</button>
+      ) : (
+        <div className="new-file-container">
+          <div className="new-file-content">
+            <div>
+              <input ref={newFile} type="file"></input>
+            </div>
+            <div>
+              <button className="popup-button-style" onClick={createFile}>
+                New
+              </button>
+            </div>
+          </div>
         </div>
-      ) : null}
-      <button onClick={handleClosing}>Cancel</button>
+      )}
+      <button className="popup-button-style" onClick={handleClosing}>
+        Cancel
+      </button>
     </div>
   );
 }

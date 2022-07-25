@@ -29,30 +29,35 @@ export default function File(props) {
     <div>
       {!isRename ? (
         <div>
-          <a href={props.link}>
+          <div className="single-file">
+            <a href={props.link}>
+              <img
+                onMouseOver={() => {
+                  if (!isDetails) {
+                    setIsDetails(true);
+                  }
+                }}
+                onMouseLeave={() => {
+                  if (isDetails) {
+                    setIsDetails(false);
+                  }
+                }}
+                className="file-icon"
+                src={props.source}
+              ></img>
+            </a>
+            <span className="file-name" onClick={() => setIsRename(true)}>
+              {" "}
+              {props.fileName}
+            </span>
             <img
-              onMouseOver={() => {
-                if (!isDetails) {
-                  setIsDetails(true);
-                }
-              }}
-              onMouseLeave={() => {
-                if (isDetails) {
-                  setIsDetails(false);
-                }
-              }}
-              className="file-icon"
-              src={props.source}
+              onClick={props.delete}
+              src={props.source2}
+              className="trash-can-icon-file"
             ></img>
-          </a>
-          <span onClick={() => setIsRename(true)}> {props.fileName}</span>
-          <img
-            onClick={props.delete}
-            src={props.source2}
-            className="trash-can-icon"
-          ></img>
+          </div>
           {isDetails ? (
-            <div>
+            <div className="details-box">
               <div>size: {props.size}</div>
               <div>created: {props.creationDate}</div>
               <div>last modified: {props.modifyDate}</div>
@@ -61,11 +66,13 @@ export default function File(props) {
           ) : null}
         </div>
       ) : (
-        <input
-          value={myValue}
-          onChange={(e) => setMyValue(e.target.value)}
-          onKeyDown={handleRename}
-        ></input>
+        <div className="rename-file">
+          <input
+            value={myValue}
+            onChange={(e) => setMyValue(e.target.value)}
+            onKeyDown={handleRename}
+          ></input>
+        </div>
       )}
     </div>
   );

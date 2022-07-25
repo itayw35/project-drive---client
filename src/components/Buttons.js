@@ -1,20 +1,37 @@
 import React, { useContext } from "react";
 import { PopupContext } from "../context/Context";
+import "./Buttons.css";
+import plusIcon from "../plus-icon.png";
 
 export default function Buttons() {
   const { setClicked, setIsNewFolder, setIsNewFile } = useContext(PopupContext);
-  const handlePopup = function (e) {
+  const handlePopupFolder = function () {
+    setIsNewFolder(true);
+    setIsNewFile(false);
     setClicked(true);
-    e.target.id === "new-folder" ? setIsNewFolder(true) : setIsNewFile(true);
+  };
+  const handlePopupFile = function () {
+    setIsNewFolder(false);
+    setIsNewFile(true);
+    setClicked(true);
   };
   return (
-    <div>
-      Buttons
-      <button id="new-folder" onClick={handlePopup}>
-        New Folder
+    <div className="buttons-flex">
+      <button
+        name="new-folder"
+        className="button-style"
+        onClick={handlePopupFolder}
+      >
+        <div name="new-folder">New Folder</div>
+        <img name="new-folder" className="plus-icon" src={plusIcon}></img>
       </button>
-      <button id="new-file" onClick={handlePopup}>
-        Upload File
+      <button
+        className="button-style"
+        name="new-file"
+        onClick={handlePopupFile}
+      >
+        <div name="new-file">Upload File</div>
+        <img name="new-file" className="plus-icon" src={plusIcon}></img>
       </button>
     </div>
   );

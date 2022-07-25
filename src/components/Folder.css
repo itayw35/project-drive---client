@@ -2,7 +2,24 @@
   height: 20px;
   width: 16px;
 }
-.trash-can-icon {
+.folder-icon:hover {
+  cursor: pointer;
+}
+.trash-can-icon-folder {
   height: 30px;
   width: 35px;
+}
+.trash-can-icon-folder:hover {
+  cursor: pointer;
+}
+.single-folder {
+  display: flex;
+  height: 30px;
+  width: 150px;
+  background-color: aliceblue;
+  justify-content: space-between;
+  align-items: center;
+}
+.single-folder:hover {
+  background-color: darkgray;
 }

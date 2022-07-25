@@ -28,7 +28,7 @@ export default function Folder(props) {
   return (
     <div>
       {!isRename ? (
-        <div>
+        <div className="single-folder">
           <img
             onDoubleClick={props.navigate}
             className="folder-icon"
@@ -38,7 +38,7 @@ export default function Folder(props) {
           <img
             onClick={props.delete}
             src={props.source2}
-            className="trash-can-icon"
+            className="trash-can-icon-folder"
           ></img>
         </div>
       ) : (

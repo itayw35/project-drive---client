@@ -1,0 +1,20 @@
+.buttons-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+}
+.button-style {
+  background-color: white;
+  height: 40px;
+  width: 150px;
+  text-align: center;
+  border-radius: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.plus-icon {
+  height: 30px;
+  width: 30px;
+}
