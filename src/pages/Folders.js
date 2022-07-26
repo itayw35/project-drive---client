@@ -14,7 +14,7 @@ import trashCanIcon from "../trash-can-icon.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./Folders.css";
 export default function Folders() {
-  const { clicked, setCurrentPath } = useContext(PopupContext);
+  const { clicked, setCurrentPath, error } = useContext(PopupContext);
   const [folders, setFolders] = useState([]);
   const [files, setFiles] = useState([]);
   const [count, setCount] = useState(0);
@@ -79,6 +79,7 @@ export default function Folders() {
           <div className="section-title-container">
             <div className="section-title">
               {" "}
+              {error ? <span className="error">{error}</span> : null}
               <h3>Folders</h3>
             </div>
           </div>

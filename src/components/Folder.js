@@ -7,7 +7,13 @@ import { PopupContext } from "../context/Context";
 export default function Folder(props) {
   const [isRename, setIsRename] = useState(false);
   const [myValue, setMyValue] = useState(props.folderName);
-  const { currentPath } = useContext(PopupContext);
+  const { currentPath, setError } = useContext(PopupContext);
+  const handleError = (error) => {
+    setError(
+      error?.response?.data || error?.message || error || "something went wrong"
+    );
+    setTimeout(setError, 5000);
+  };
   const handleRename = function (e) {
     if (e.key === "Enter") {
       axios
@@ -21,34 +27,37 @@ export default function Folder(props) {
           setIsRename(false);
           props.setIsRename(!props.isRename);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          console.log(error);
+          handleError(error);
+        });
     }
   };
   // const { folderName } = useParams();
   return (
     <div>
-      {!isRename ? (
-        <div className="single-folder">
-          <img
-            onDoubleClick={props.navigate}
-            className="folder-icon"
-            src={props.source}
-          ></img>
+      <div className="single-folder">
+        <img
+          onDoubleClick={props.navigate}
+          className="folder-icon"
+          src={props.source}
+        ></img>
+        {!isRename ? (
           <span onClick={() => setIsRename(true)}> {props.folderName}</span>
-          <img
-            onClick={props.delete}
-            src={props.source2}
-            className="trash-can-icon-folder"
-          ></img>
-        </div>
-      ) : (
-        <input
-          autoFocus
-          value={myValue}
-          onChange={(e) => setMyValue(e.target.value)}
-          onKeyDown={handleRename}
-        ></input>
-      )}
+        ) : (
+          <input
+            autoFocus
+            value={myValue}
+            onChange={(e) => setMyValue(e.target.value)}
+            onKeyDown={handleRename}
+          ></input>
+        )}
+        <img
+          onClick={props.delete}
+          src={props.source2}
+          className="trash-can-icon-folder"
+        ></img>
+      </div>
     </div>
   );
 }

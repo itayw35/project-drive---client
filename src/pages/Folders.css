@@ -49,3 +49,8 @@
   justify-content: flex-start;
   color: navy;
 }
+.error {
+  position: absolute;
+  left: 50%;
+  color: red;
+}

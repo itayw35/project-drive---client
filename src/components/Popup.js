@@ -1,7 +1,8 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useRef } from "react";
 import axios from "axios";
 import "./Popup.css";
 import { PopupContext } from "../context/Context";
+// import { AiOutlineCloudUpload } from "react-icons/ai";
 
 export default function Popup() {
   const folderName = useRef();
@@ -13,8 +14,14 @@ export default function Popup() {
     isNewFile,
     setIsNewFile,
     currentPath,
+    setError,
   } = useContext(PopupContext);
-  const [message, setMessage] = useState();
+  const handleError = (error) => {
+    setError(
+      error?.response?.data || error?.message || error || "something went wrong"
+    );
+    setTimeout(setError, 5000);
+  };
   const createFolder = function () {
     setClicked(false);
     setIsNewFolder(false);
@@ -25,7 +32,10 @@ export default function Popup() {
       .then((data) => {
         console.log(data);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+        handleError(error);
+      });
   };
   const createFile = function () {
     const formData = new FormData();
@@ -39,6 +49,7 @@ export default function Popup() {
       })
       .catch((error) => {
         console.log(error);
+        handleError(error);
       });
   };
   const handleClosing = function () {
@@ -70,7 +81,8 @@ export default function Popup() {
         <div className="new-file-container">
           <div className="new-file-content">
             <div>
-              <input ref={newFile} type="file"></input>
+              <input className="upload-input" ref={newFile} type="file"></input>
+              {/* <AiOutlineCloudUpload onClick={newFile.current.click()} /> */}
             </div>
             <div>
               <button className="popup-button-style" onClick={createFile}>

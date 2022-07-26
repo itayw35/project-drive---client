@@ -8,7 +8,13 @@ export default function File(props) {
   const [isRename, setIsRename] = useState(false);
   const [myValue, setMyValue] = useState(props.fileName);
   const [isDetails, setIsDetails] = useState(false);
-  const { currentPath } = useContext(PopupContext);
+  const { currentPath, setError } = useContext(PopupContext);
+  const handleError = (error) => {
+    setError(
+      error?.response?.data || error?.message || error || "something went wrong"
+    );
+    setTimeout(setError, 5000);
+  };
   const handleRename = function (e) {
     if (e.key === "Enter") {
       axios
@@ -22,60 +28,63 @@ export default function File(props) {
           setIsRename(false);
           props.setIsRename(!props.isRename);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          console.log(error);
+          handleError(error);
+        });
     }
   };
   return (
     <div>
-      {!isRename ? (
-        <div>
-          <div className="single-file">
-            <a href={props.link}>
-              <img
-                onMouseOver={() => {
-                  if (!isDetails) {
-                    setIsDetails(true);
-                  }
-                }}
-                onMouseLeave={() => {
-                  if (isDetails) {
-                    setIsDetails(false);
-                  }
-                }}
-                className="file-icon"
-                src={props.source}
-              ></img>
-            </a>
+      <div>
+        <div className="single-file">
+          <a href={props.link}>
+            <img
+              onMouseOver={() => {
+                if (!isDetails) {
+                  setIsDetails(true);
+                }
+              }}
+              onMouseLeave={() => {
+                if (isDetails) {
+                  setIsDetails(false);
+                }
+              }}
+              className="file-icon"
+              src={props.source}
+            ></img>
+          </a>
+          {!isRename ? (
             <span className="file-name" onClick={() => setIsRename(true)}>
               {" "}
               {props.fileName}
             </span>
-            <img
-              onClick={props.delete}
-              src={props.source2}
-              className="trash-can-icon-file"
-            ></img>
-          </div>
-          {isDetails ? (
-            <div className="details-box">
-              <div>size: {props.size}</div>
-              <div>created: {props.creationDate}</div>
-              <div>last modified: {props.modifyDate}</div>
-              <div>last changed: {props.changeDate}</div>
+          ) : (
+            <div className="rename-file-container">
+              <input
+                autoFocus
+                className="rename-file-content"
+                value={myValue}
+                onChange={(e) => setMyValue(e.target.value)}
+                onKeyDown={handleRename}
+              ></input>
             </div>
-          ) : null}
+          )}
+          <img
+            onClick={props.delete}
+            src={props.source2}
+            className="trash-can-icon-file"
+          ></img>
         </div>
-      ) : (
-        <div className="rename-file-container">
-          <input
-            autoFocus
-            className="rename-file-content"
-            value={myValue}
-            onChange={(e) => setMyValue(e.target.value)}
-            onKeyDown={handleRename}
-          ></input>
-        </div>
-      )}
+        {isDetails ? (
+          <div className="details-box">
+            <div>size: {props.size}</div>
+            <div>created: {props.creationDate}</div>
+            <div>last modified: {props.modifyDate}</div>
+            <div>last changed: {props.changeDate}</div>
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 }

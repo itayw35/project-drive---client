@@ -9,6 +9,7 @@ export default function Layout() {
   const [isNewFolder, setIsNewFolder] = useState(false);
   const [isNewFile, setIsNewFile] = useState(false);
   const [currentPath, setCurrentPath] = useState("");
+  const [error, setError] = useState();
 
   return (
     <div>
@@ -22,6 +23,8 @@ export default function Layout() {
           setIsNewFile,
           currentPath,
           setCurrentPath,
+          error,
+          setError,
         }}
       >
         <Header />

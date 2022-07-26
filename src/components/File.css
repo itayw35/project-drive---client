@@ -7,6 +7,7 @@
 }
 .single-file {
   height: 170px;
+  width: 110px;
   max-width: 110px;
   display: flex;
   flex-direction: column;
