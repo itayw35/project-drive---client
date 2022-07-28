@@ -143,9 +143,9 @@ export default function Folders() {
                           }
                           source2={trashCanIcon}
                           alt="img"
-                          link={`http://localhost:3050/files/download?fileName=${file.name.slice(
-                            5
-                          )}`}
+                          link={`${
+                            baseURL || secondURL
+                          }/files/download?fileName=${file.name.slice(5)}`}
                           fileName={file.name.slice(
                             file.name.lastIndexOf("/") + 1
                           )}
