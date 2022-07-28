@@ -48,7 +48,7 @@ export default function Folders() {
   const handleDeleteFile = function (file) {
     axios
       .delete(
-        `http://localhost:3050/files/delete?fileName=${file.name.slice(5)}`
+        `http://localhost:3050/files/delete?fileName=${file.name.slice(4)}`
       )
       .then((data) => {
         console.log(data);
@@ -59,7 +59,7 @@ export default function Folders() {
   const handleDeleteFolder = function (folder) {
     axios
       .delete(
-        `http://localhost:3050/folders/delete?folderName=${folder.slice(5)}`
+        `http://localhost:3050/folders/delete?folderName=${folder.slice(4)}`
       )
       .then((data) => {
         console.log(data);

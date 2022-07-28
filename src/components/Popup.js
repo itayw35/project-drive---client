@@ -82,10 +82,11 @@ export default function Popup() {
           <div className="new-file-content">
             <div>
               <input className="upload-input" ref={newFile} type="file"></input>
-              {/* <AiOutlineCloudUpload onClick={newFile.current.click()} /> */}
+              {/* <AiOutlineCloudUpload onClick={newFile?.current?.click()} /> */}
             </div>
             <div>
               <button className="popup-button-style" onClick={createFile}>
+                {" "}
                 New
               </button>
             </div>
