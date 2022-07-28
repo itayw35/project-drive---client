@@ -9,6 +9,9 @@ import docx from "../word-icon.png";
 import pdf from "../pdf-icon.jpeg";
 import pages from "../pages icon.jpeg";
 import txt from "../txt-icon.png";
+import jpg from "../jpg-icon.png";
+import HEIF from "../HEIF-icon.png";
+import HEIC from "../HEIC-icon.png";
 import folderIcon from "../folder-icon.png";
 import trashCanIcon from "../trash-can-icon.png";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -139,6 +142,21 @@ export default function Folders() {
                                   file.name.lastIndexOf(".") + 1
                                 ) === "txt"
                               ? txt
+                              : file.name.slice(
+                                  file.name.lastIndexOf(".") + 1
+                                ) === "jpg" ||
+                                file.name.slice(
+                                  file.name.lastIndexOf(".") + 1
+                                ) === "jpeg"
+                              ? jpg
+                              : file.name.slice(
+                                  file.name.lastIndexOf(".") + 1
+                                ) === "heif"
+                              ? HEIF
+                              : file.name.slice(
+                                  file.name.lastIndexOf(".") + 1
+                                ) === "heic"
+                              ? HEIC
                               : null
                           }
                           source2={trashCanIcon}

@@ -17,7 +17,8 @@ export default function File(props) {
     setTimeout(setError, 5000);
   };
   const handleRename = function (e) {
-    if (e.key === "Enter") {
+    console.log(e._reactName);
+    if (e.key === "Enter" || e._reactName === "onBlur") {
       axios
         .put(`${baseURL || secondURL}/files/rename`, {
           path: currentPath,
@@ -68,6 +69,7 @@ export default function File(props) {
                 value={myValue}
                 onChange={(e) => setMyValue(e.target.value)}
                 onKeyDown={handleRename}
+                onBlur={handleRename}
               ></input>
             </div>
           )}

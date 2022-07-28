@@ -16,7 +16,7 @@ export default function Folder(props) {
     setTimeout(setError, 5000);
   };
   const handleRename = function (e) {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" || e._reactName === "onBlur") {
       axios
         .put(`${baseURL || secondURL}/folders/rename`, {
           path: currentPath,
@@ -50,6 +50,7 @@ export default function Folder(props) {
             value={myValue}
             onChange={(e) => setMyValue(e.target.value)}
             onKeyDown={handleRename}
+            onBlur={handleRename}
           ></input>
         )}
         <img
