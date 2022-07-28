@@ -8,7 +8,8 @@ export default function File(props) {
   const [isRename, setIsRename] = useState(false);
   const [myValue, setMyValue] = useState(props.fileName);
   const [isDetails, setIsDetails] = useState(false);
-  const { currentPath, setError } = useContext(PopupContext);
+  const { currentPath, setError, baseURL, secondURL } =
+    useContext(PopupContext);
   const handleError = (error) => {
     setError(
       error?.response?.data || error?.message || error || "something went wrong"
@@ -18,7 +19,7 @@ export default function File(props) {
   const handleRename = function (e) {
     if (e.key === "Enter") {
       axios
-        .put("http://localhost:3050/files/rename", {
+        .put(`${baseURL || secondURL}/files/rename`, {
           path: currentPath,
           oldName: props.fileName,
           newName: e.target.value,

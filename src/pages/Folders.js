@@ -14,7 +14,8 @@ import trashCanIcon from "../trash-can-icon.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./Folders.css";
 export default function Folders() {
-  const { clicked, setCurrentPath, error } = useContext(PopupContext);
+  const { clicked, setCurrentPath, error, baseURL, secondURL } =
+    useContext(PopupContext);
   const [folders, setFolders] = useState([]);
   const [files, setFiles] = useState([]);
   const [count, setCount] = useState(0);
@@ -22,12 +23,11 @@ export default function Folders() {
   const [isRename, setIsRename] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
-    console.log(location);
     axios
       .get(
-        `http://localhost:3050/folders/get?folderName=${location.pathname.slice(
-          8
-        )}`
+        `${
+          baseURL || secondURL
+        }/folders/get?folderName=${location.pathname.slice(8)}`
       )
       .then((data) => {
         console.log(data.data);
@@ -48,7 +48,7 @@ export default function Folders() {
   const handleDeleteFile = function (file) {
     axios
       .delete(
-        `http://localhost:3050/files/delete?fileName=${file.name.slice(4)}`
+        `${baseURL || secondURL}/files/delete?fileName=${file.name.slice(4)}`
       )
       .then((data) => {
         console.log(data);
@@ -59,7 +59,7 @@ export default function Folders() {
   const handleDeleteFolder = function (folder) {
     axios
       .delete(
-        `http://localhost:3050/folders/delete?folderName=${folder.slice(4)}`
+        `${baseURL || secondURL}/folders/delete?folderName=${folder.slice(4)}`
       )
       .then((data) => {
         console.log(data);

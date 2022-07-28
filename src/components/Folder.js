@@ -7,7 +7,8 @@ import { PopupContext } from "../context/Context";
 export default function Folder(props) {
   const [isRename, setIsRename] = useState(false);
   const [myValue, setMyValue] = useState(props.folderName);
-  const { currentPath, setError } = useContext(PopupContext);
+  const { currentPath, setError, baseURL, secondURL } =
+    useContext(PopupContext);
   const handleError = (error) => {
     setError(
       error?.response?.data || error?.message || error || "something went wrong"
@@ -17,7 +18,7 @@ export default function Folder(props) {
   const handleRename = function (e) {
     if (e.key === "Enter") {
       axios
-        .put("http://localhost:3050/folders/rename", {
+        .put(`${baseURL || secondURL}/folders/rename`, {
           path: currentPath,
           oldName: props.folderName,
           newName: e.target.value,
@@ -33,7 +34,6 @@ export default function Folder(props) {
         });
     }
   };
-  // const { folderName } = useParams();
   return (
     <div>
       <div className="single-folder">

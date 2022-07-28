@@ -10,7 +10,8 @@ export default function Layout() {
   const [isNewFile, setIsNewFile] = useState(false);
   const [currentPath, setCurrentPath] = useState("");
   const [error, setError] = useState();
-
+  const baseURL = "https://itay-drive.herokuapp.com";
+  const secondURL = "http://localhost:3050";
   return (
     <div>
       <PopupContext.Provider
@@ -25,6 +26,8 @@ export default function Layout() {
           setCurrentPath,
           error,
           setError,
+          baseURL,
+          secondURL,
         }}
       >
         <Header />

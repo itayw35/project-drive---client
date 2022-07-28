@@ -15,6 +15,8 @@ export default function Popup() {
     setIsNewFile,
     currentPath,
     setError,
+    baseURL,
+    secondURL,
   } = useContext(PopupContext);
   const handleError = (error) => {
     setError(
@@ -23,14 +25,14 @@ export default function Popup() {
     setTimeout(setError, 5000);
   };
   const createFolder = function () {
-    setClicked(false);
-    setIsNewFolder(false);
     axios
-      .post("http://localhost:3050/folders/create", {
+      .post(`${baseURL || secondURL}/folders/create`, {
         folderName: `${currentPath}/${folderName.current.value}`,
       })
       .then((data) => {
         console.log(data);
+        setClicked(false);
+        setIsNewFolder(false);
       })
       .catch((error) => {
         console.log(error);
@@ -42,7 +44,7 @@ export default function Popup() {
     formData.append("myFile", newFile.current.files[0]);
     setIsNewFile(false);
     axios
-      .post(`http://localhost:3050/files/upload?path=${currentPath}`, formData)
+      .post(`${baseURL}/files/upload?path=${currentPath}`, formData)
       .then((data) => {
         console.log(data);
         setClicked(false);
