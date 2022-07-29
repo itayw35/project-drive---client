@@ -32,6 +32,9 @@
   width: 150px;
   border-radius: 50px;
 }
+.popup-button-style:hover {
+  background-color: rgba(128, 128, 128, 0.219);
+}
 .new-file-container {
   display: flex;
   flex-direction: column;
