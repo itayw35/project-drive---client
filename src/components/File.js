@@ -57,7 +57,13 @@ export default function File(props) {
             ></img>
           </a>
           {!isRename ? (
-            <span className="file-name" onClick={() => setIsRename(true)}>
+            <span
+              className="file-name"
+              onClick={() => {
+                setIsRename(true);
+                setMyValue(props.fileName);
+              }}
+            >
               {" "}
               {props.fileName}
             </span>
