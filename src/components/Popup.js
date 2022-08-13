@@ -25,6 +25,7 @@ export default function Popup() {
     setTimeout(setError, 5000);
   };
   const createFolder = function () {
+    folderName.current.autoFocus = false;
     axios
       .post(`${baseURL || secondURL}/folders/create`, {
         folderName: `${currentPath}/${folderName.current.value}`,
