@@ -2,7 +2,7 @@ import React, { useContext, useRef } from "react";
 import axios from "axios";
 import "./Popup.css";
 import { PopupContext } from "../context/Context";
-// import { AiOutlineCloudUpload } from "react-icons/ai";
+import { AiOutlineCloudUpload } from "react-icons/ai";
 
 export default function Popup() {
   const folderName = useRef();
@@ -83,8 +83,17 @@ export default function Popup() {
         <div className="new-file-container">
           <div className="new-file-content">
             <div>
-              <input className="upload-input" ref={newFile} type="file"></input>
-              {/* <AiOutlineCloudUpload onClick={newFile?.current?.click()} /> */}
+              <label className="file-upload-icon" for="file">
+                <AiOutlineCloudUpload />
+                <h5>choose file</h5>
+              </label>
+              <input
+                id="file"
+                name="file"
+                className="upload-input"
+                ref={newFile}
+                type="file"
+              ></input>
             </div>
             <div>
               <button className="popup-button-style" onClick={createFile}>

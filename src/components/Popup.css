@@ -49,6 +49,17 @@
   height: 75%;
   color: blue;
 }
-/* .upload-input {
-  display: none;
-} */
+.upload-input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.new-file-content svg {
+  font-size: 2rem;
+}
+.file-upload-icon {
+  cursor: pointer;
+}

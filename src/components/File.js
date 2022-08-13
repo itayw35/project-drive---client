@@ -6,8 +6,8 @@ import axios from "axios";
 
 export default function File(props) {
   const [isRename, setIsRename] = useState(false);
-  const [myValue, setMyValue] = useState(props.fileName);
-  const [isDetails, setIsDetails] = useState(false);
+  const [myValue, setMyValue] = useState(props.fileName.slice(0, -4));
+  // const [isDetails, setIsDetails] = useState(false);
   const { currentPath, setError, baseURL, secondURL } =
     useContext(PopupContext);
   const handleError = (error) => {
@@ -23,7 +23,9 @@ export default function File(props) {
         .put(`${baseURL || secondURL}/files/rename`, {
           path: currentPath,
           oldName: props.fileName,
-          newName: e.target.value,
+          newName:
+            e.target.value +
+            props.fileName.slice(props.fileName.lastIndexOf(".")),
         })
         .then((data) => {
           console.log(data);
@@ -42,16 +44,16 @@ export default function File(props) {
         <div className="single-file">
           <a href={props.link}>
             <img
-              onMouseOver={() => {
-                if (!isDetails) {
-                  setIsDetails(true);
-                }
-              }}
-              onMouseLeave={() => {
-                if (isDetails) {
-                  setIsDetails(false);
-                }
-              }}
+              // onMouseOver={() => {
+              //   if (!isDetails) {
+              //     setIsDetails(true);
+              //   }
+              // }}
+              // onMouseLeave={() => {
+              //   if (isDetails) {
+              //     setIsDetails(false);
+              //   }
+              // }}
               className="file-icon"
               src={props.source}
             ></img>
@@ -61,11 +63,17 @@ export default function File(props) {
               className="file-name"
               onClick={() => {
                 setIsRename(true);
-                setMyValue(props.fileName);
+                setMyValue(
+                  props.fileName.slice(0, props.fileName.lastIndexOf("."))
+                );
               }}
             >
               {" "}
-              {props.fileName}
+              <abbr
+                title={`size: ${props.size}\ncreated: ${props.creationDate}\nlast modified: ${props.modifyDate}\nlast changed: ${props.changeDate}`}
+              >
+                {props.fileName}{" "}
+              </abbr>
             </span>
           ) : (
             <div className="rename-file-container">
@@ -85,14 +93,14 @@ export default function File(props) {
             className="trash-can-icon-file"
           ></img>
         </div>
-        {isDetails ? (
+        {/* {isDetails ? (
           <div className="details-box">
             <div>size: {props.size}</div>
             <div>created: {props.creationDate}</div>
             <div>last modified: {props.modifyDate}</div>
             <div>last changed: {props.changeDate}</div>
           </div>
-        ) : null}
+        ) : null} */}
       </div>
     </div>
   );

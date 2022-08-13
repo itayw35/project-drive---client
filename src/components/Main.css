@@ -1,4 +1,9 @@
 .overlay {
   background-color: whitesmoke;
-  height: 100vh;
+  height: 85vh;
+}
+@media screen and (max-width: 600px) {
+  .overlay {
+    height: 89vh;
+  }
 }
