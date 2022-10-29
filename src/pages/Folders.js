@@ -12,6 +12,7 @@ import txt from "../txt-icon.png";
 import jpg from "../jpg-icon.png";
 import HEIF from "../HEIF-icon.png";
 import HEIC from "../HEIC-icon.png";
+import m4a from "../m4a-icon.jpeg";
 import folderIcon from "../folder-icon.png";
 import trashCanIcon from "../trash-can-icon.png";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -157,7 +158,7 @@ export default function Folders() {
                                   file.name.lastIndexOf(".") + 1
                                 ) === "heic"
                               ? HEIC
-                              : null
+                              : file.name.slice(file.name.lastIndexOf(".")+1)==="m4a"?m4a:null
                           }
                           source2={trashCanIcon}
                           alt="img"
