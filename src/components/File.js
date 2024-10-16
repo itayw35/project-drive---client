@@ -39,8 +39,7 @@ export default function File(props) {
     }
   };
   const handleCopy = ()=>{    
-    sessionStorage.copiedItem = currentPath != "" ? `${currentPath}/${props.fileName}` : props.fileName;
-    sessionStorage.itemName = props.fileName;
+    sessionStorage.copiedItem = JSON.stringify({path :currentPath != "" ? `${currentPath}/${props.fileName}` : props.fileName, itemName : props.fileName, itemType: "file"});
     setIsPaste(true)
   }
   return (

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useParams } from "react-router-dom";
+import { json, useParams } from "react-router-dom";
 import { useState } from "react";
 import "./Folder.css";
 import axios from "axios";
@@ -37,8 +37,7 @@ export default function Folder(props) {
     }
   };
   const handleCopy = ()=>{
-    sessionStorage.copiedItem = currentPath != "" ? `${currentPath}/${props.foldeName}` : props.foldeName;
-    sessionStorage.itemName = props.folderName;
+    sessionStorage.copiedItem = JSON.stringify({path : currentPath != "" ? `${currentPath}/${props.folderName}` : props.folderName, itemName : props.folderName, itemType : "folder"});
     setIsPaste(true)
   }
   return (

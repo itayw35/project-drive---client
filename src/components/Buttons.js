@@ -24,10 +24,13 @@ export default function Buttons() {
     setTimeout(setError, 5000);
   };
   const handlePaste = ()=>{
-    const newPath = currentPath != "" ? `${currentPath}/${sessionStorage.itemName}` : sessionStorage.itemName;
+    const itemData = JSON.parse(sessionStorage.copiedItem)
+    console.log(itemData);
+    
+    const newPath = currentPath != "" ? `${currentPath}/${itemData.itemName}` : itemData.itemName;
     axios
-        .put(`${baseURL || secondURL}/files/copy`, {
-          path: sessionStorage.copiedItem,
+        .put(`${baseURL || secondURL}/${itemData.itemType}s/copy`, {
+          path: itemData.path,
           newPath: newPath
         })
         .then((data) => {
@@ -39,6 +42,7 @@ export default function Buttons() {
           handleError(error);
         });
         sessionStorage.copiedItem = "";
+        sessionStorage.itemName = "";
   }
   return (
     <div className="buttons-flex">
