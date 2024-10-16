@@ -52,3 +52,13 @@
   display: flex;
   height: 20%;
 }
+input{
+  font-size: 16px;
+}
+#file-actions{
+  display: flex;
+  align-items: center;
+}
+#file-actions svg:hover{
+  cursor: pointer;
+}

@@ -21,3 +21,9 @@
   height: 30px;
   width: 30px;
 }
+.buttons-flex svg{
+  font-size :xx-large;
+}
+.buttons-flex svg:hover{
+  cursor: pointer;
+}

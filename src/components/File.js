@@ -3,12 +3,13 @@ import "./File.css";
 import { useState } from "react";
 import { PopupContext } from "../context/Context";
 import axios from "axios";
+import { FaCopy } from "react-icons/fa6";
 
 export default function File(props) {
   const [isRename, setIsRename] = useState(false);
   const [myValue, setMyValue] = useState(props.fileName.slice(0, -4));
   // const [isDetails, setIsDetails] = useState(false);
-  const { currentPath, setError, baseURL, secondURL } =
+  const { currentPath, setError, baseURL, secondURL, setIsPaste } =
     useContext(PopupContext);
   const handleError = (error) => {
     setError(
@@ -17,7 +18,6 @@ export default function File(props) {
     setTimeout(setError, 5000);
   };
   const handleRename = function (e) {
-    console.log(e._reactName);
     if (e.key === "Enter" || e._reactName === "onBlur") {
       axios
         .put(`${baseURL || secondURL}/files/rename`, {
@@ -38,6 +38,11 @@ export default function File(props) {
         });
     }
   };
+  const handleCopy = ()=>{    
+    sessionStorage.copiedItem = currentPath != "" ? `${currentPath}/${props.fileName}` : props.fileName;
+    sessionStorage.itemName = props.fileName;
+    setIsPaste(true)
+  }
   return (
     <div>
       <div>
@@ -87,11 +92,15 @@ export default function File(props) {
               ></input>
             </div>
           )}
-          <img
-            onClick={props.delete}
-            src={props.source2}
-            className="trash-can-icon-file"
-          ></img>
+          <div id="file-actions">
+            <img
+              onClick={props.delete}
+              src={props.source2}
+              className="trash-can-icon-file"
+              title="delete"
+            ></img>
+            <FaCopy onClick={handleCopy} title="copy" />
+          </div>
         </div>
         {/* {isDetails ? (
           <div className="details-box">

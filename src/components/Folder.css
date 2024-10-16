@@ -23,3 +23,6 @@
 .single-folder:hover {
   background-color: darkgray;
 }
+.single-folder svg:hover{
+  cursor: pointer;
+}

@@ -4,10 +4,12 @@ import { useState } from "react";
 import "./Folder.css";
 import axios from "axios";
 import { PopupContext } from "../context/Context";
+import { FaCopy } from "react-icons/fa6";
+
 export default function Folder(props) {
   const [isRename, setIsRename] = useState(false);
   const [myValue, setMyValue] = useState(props.folderName);
-  const { currentPath, setError, baseURL, secondURL } =
+  const { currentPath, setError, baseURL, secondURL, setIsPaste} =
     useContext(PopupContext);
   const handleError = (error) => {
     setError(
@@ -34,6 +36,11 @@ export default function Folder(props) {
         });
     }
   };
+  const handleCopy = ()=>{
+    sessionStorage.copiedItem = currentPath != "" ? `${currentPath}/${props.foldeName}` : props.foldeName;
+    sessionStorage.itemName = props.folderName;
+    setIsPaste(true)
+  }
   return (
     <div>
       <div className="single-folder">
@@ -57,7 +64,9 @@ export default function Folder(props) {
           onClick={props.delete}
           src={props.source2}
           className="trash-can-icon-folder"
+          title="delete"
         ></img>
+        <FaCopy onClick={handleCopy} title="copy" />
       </div>
     </div>
   );

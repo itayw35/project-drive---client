@@ -18,7 +18,7 @@ import trashCanIcon from "../trash-can-icon.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./Folders.css";
 export default function Folders() {
-  const { clicked, setCurrentPath, error, baseURL, secondURL } =
+  const { clicked, setCurrentPath, error, baseURL, secondURL, isPaste } =
     useContext(PopupContext);
   const [folders, setFolders] = useState([]);
   const [files, setFiles] = useState([]);
@@ -39,7 +39,7 @@ export default function Folders() {
         setFiles(data.data.files);
       })
       .catch((error) => console.log(error));
-  }, [clicked, count, isRename, location.state]);
+  }, [clicked, count, isRename, location.state, isPaste]);
   useEffect(() => {
     setCurrentPath(location.pathname.slice(8));
   }, [count, location.state]);

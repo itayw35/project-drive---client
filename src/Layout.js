@@ -10,6 +10,7 @@ export default function Layout() {
   const [isNewFile, setIsNewFile] = useState(false);
   const [currentPath, setCurrentPath] = useState("");
   const [error, setError] = useState();
+  const [isPaste, setIsPaste] = useState(false)
   const baseURL = "https://itay-drive.herokuapp.com";
   const secondURL = "http://localhost:3050";
   return (
@@ -28,6 +29,8 @@ export default function Layout() {
           setError,
           baseURL,
           secondURL,
+          isPaste,
+          setIsPaste
         }}
       >
         <Header />
